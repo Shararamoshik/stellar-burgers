@@ -24,6 +24,14 @@
   color: var(--text-primary-color);
 }
 
+.icon {
+  fill: var(--text-inactive-color);
+}
+
+.icon_active {
+  fill: var(--text-primary-color);
+}
+
 .link_position_last {
   display: flex;
   justify-content: flex-end;
