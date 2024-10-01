@@ -13,7 +13,7 @@ import { AppHeader, IngredientDetails, OrderInfo, Modal } from '@components';
 import { useNavigate, useLocation } from 'react-router';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
-import { useEffect } from 'react';
+import useEffect from "../../services/store"
 import { ProtectedRoute } from '../protected-route';
 import { loadIngredients } from '../../slices/ingredientsSlice';
 import { loadUser, authCheck } from '../../slices/userSlice';
