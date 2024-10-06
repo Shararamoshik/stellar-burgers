@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getFeedsApi } from '@api';
+import { getFeedsApi } from '../utils/burger-api';
 import { TOrder } from '@utils-types';
 
 export interface TFeedState {
@@ -10,7 +10,7 @@ export interface TFeedState {
   error: string | null;
 }
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   orders: [],
   total: 0,
   totalToday: 0,
@@ -38,8 +38,7 @@ export const feedSlice = createSlice({
         state.total = 0;
         state.totalToday = 0;
         state.loading = false;
-        state.error =
-          action.error.message || 'Не удалось получить ленту заказов';
+        state.error = action.error.message!;
       })
       .addCase(loadFeeds.fulfilled, (state, action) => {
         state.orders = action.payload.orders;

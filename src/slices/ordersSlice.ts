@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { getOrderByNumberApi, orderBurgerApi } from '@api';
+import { getOrderByNumberApi, orderBurgerApi } from '../utils/burger-api';
 
 interface TOrdersState {
   currentOrder: TOrder | null;
@@ -9,7 +9,7 @@ interface TOrdersState {
   error: string | null;
 }
 
-const initialState: TOrdersState = {
+export const initialState: TOrdersState = {
   currentOrder: null,
   modalOrder: null,
   loading: false,
@@ -38,8 +38,7 @@ export const ordersSlice = createSlice({
       })
       .addCase(loadOrderById.rejected, (state, action) => {
         state.loading = false;
-        state.error =
-          action.error.message || 'Не удалось получить информацию о заказе';
+        state.error = action.error.message!;
       })
       .addCase(loadOrderById.fulfilled, (state, action) => {
         state.loading = false;
@@ -53,7 +52,7 @@ export const ordersSlice = createSlice({
       })
       .addCase(placeNewOrder.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Не удалось разместить заказ';
+        state.error = action.error.message!;
       })
       .addCase(placeNewOrder.fulfilled, (state, action) => {
         state.loading = false;
@@ -65,7 +64,7 @@ export const ordersSlice = createSlice({
 
 export const loadOrderById = createAsyncThunk(
   'orders/fetchOrderById',
-  async (id: number) => getOrderByNumberApi(id)
+  getOrderByNumberApi
 );
 
 export const placeNewOrder = createAsyncThunk(
